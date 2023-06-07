@@ -12,9 +12,6 @@ const checkAdmin = async (req) => {
   const actualCreds = {
     username: req.body.username,
   };
-  console.log(req.body.username);
-  console.log(req.body.password);
-
   const resultFromDB = await User.findOne(actualCreds);
 
   if (
