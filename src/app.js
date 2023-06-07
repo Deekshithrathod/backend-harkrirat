@@ -6,6 +6,7 @@ const problemRouter = require("./routes/problemRoutes");
 const solutionRouter = require("./routes/solutionRoutes");
 const hasCreds = require("./middlewares/hasCreds");
 const isAdmin = require("./middlewares/isAdmin");
+const errorMiddleware = require("./middlewares/errorHandler");
 
 const app = express();
 
@@ -38,3 +39,5 @@ app.use("/login", hasCreds, loginRouter);
 app.use("/signup", hasCreds, signupRouter);
 app.use("/problems", hasCreds, isAdmin, problemRouter);
 app.use("/solutions", solutionRouter);
+
+app.use(errorMiddleware);

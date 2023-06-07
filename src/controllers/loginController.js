@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const InvalidCredentalsError = require("../errors/invalidCredentialsError");
 
 const roles = ["USER", "ADMIN"];
 
@@ -10,13 +11,17 @@ const userSchema = new mongoose.Schema({
 
 const User = new mongoose.model("User", userSchema);
 
-const login = async (req, res) => {
-  const userCreds = await User.findOne({ username: req.body.username });
+const login = async (req, res, next) => {
+  try {
+    const userCreds = await User.findOne({ username: req.body.username });
 
-  if (!userCreds || req.body.password !== userCreds.password) {
-    return res.json({ msg: "Wrong credentials" }).status(403);
+    if (!userCreds || req.body.password !== userCreds.password) {
+      throw new InvalidCredentalsError();
+    }
+    return res.json({ msg: `Logged In! You are a ${userCreds.role}` });
+  } catch (err) {
+    next(err);
   }
-  return res.json({ msg: `Logged In! You are a ${userCreds.role}` });
 };
 
 module.exports = { login, User };
