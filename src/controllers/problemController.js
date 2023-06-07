@@ -1,17 +1,5 @@
-const mongoose = require("mongoose");
+const Problem = require("../models/Problem");
 
-const testCaseSchema = new mongoose.Schema({
-  input: "String",
-  output: "String",
-});
-
-const problemSchema = new mongoose.Schema({
-  title: String,
-  problemStatement: String,
-  testcases: [testCaseSchema],
-});
-
-const Problem = new mongoose.model("Problem", problemSchema);
 const addProblem = (req, res) => {
   // validity of the problem
   // if not return 403
@@ -23,7 +11,7 @@ const addProblem = (req, res) => {
   };
   const newProblem = new Problem(problem);
   newProblem.save();
-  res.json({ msg: "Got the problem" });
+  res.json({ msg: "Problem accepted" });
 };
 
 module.exports = addProblem;

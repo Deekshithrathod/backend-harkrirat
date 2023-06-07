@@ -1,7 +1,7 @@
 const InvalidCredentalsError = require("../errors/invalidCredentialsError");
 const NotAdminError = require("../errors/notAdminError");
 
-const User = require("../controllers/loginController").User;
+const { User } = require("../models/User");
 
 const isAdmin = async (req, res, next) => {
   try {

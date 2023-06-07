@@ -6,9 +6,7 @@ const errorMiddleware = (err, req, res, next) => {
   if (err instanceof EmptyCredentalsError) {
     return res.status(400).json({ msg: "Username, password cannot be empty" });
   } else if (err instanceof InvalidCredentalsError) {
-    return res
-      .status(403)
-      .json({ msg: "Username or password or both are Invalid" });
+    return res.status(403).json({ msg: "Username|Password|Both are Invalid" });
   } else if (err instanceof NotAdmin) {
     return res.status(403).json({ msg: "Not ADMIN, please contact support" });
   } else {

@@ -1,15 +1,5 @@
-const mongoose = require("mongoose");
+const { User } = require("../models/User");
 const InvalidCredentalsError = require("../errors/invalidCredentialsError");
-
-const roles = ["USER", "ADMIN"];
-
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  role: { type: String, enum: roles },
-});
-
-const User = new mongoose.model("User", userSchema);
 
 const login = async (req, res, next) => {
   try {
@@ -24,4 +14,4 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { login, User };
+module.exports = login;

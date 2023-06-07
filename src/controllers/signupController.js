@@ -1,5 +1,5 @@
-const roles = ["USER", "ADMIN"];
-const User = require("../controllers/loginController").User;
+const { roles, User } = require("../models/User");
+// const User = require("../controllers/loginController").User;
 
 const signup = (req, res) => {
   // TODO: Don't allow duplicates i.e. users with same email ID to sign-up multiple times
