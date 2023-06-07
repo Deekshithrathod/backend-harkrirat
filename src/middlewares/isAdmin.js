@@ -1,19 +1,26 @@
-const isAdmin = (req, res, next) => {
-  if (checkAdmin(req)) {
+const User = require("../controllers/loginController").User;
+
+const isAdmin = async (req, res, next) => {
+  if (await checkAdmin(req)) {
     next();
     return;
   }
   return res.json({ msg: "NOT ADMIN" }).status(403);
 };
 
-const checkAdmin = (req) => {
+const checkAdmin = async (req) => {
   const actualCreds = {
-    username: req.username,
+    username: req.body.username,
   };
-  const resultFromDB = User.findOne(actualCreds);
+  console.log(req.body.username);
+  console.log(req.body.password);
+
+  const resultFromDB = await User.findOne(actualCreds);
+
   if (
+    resultFromDB &&
     req.body.password === resultFromDB.password &&
-    resultFromDB.isAdmin !== true
+    resultFromDB.role === "ADMIN"
   ) {
     return true;
   }
