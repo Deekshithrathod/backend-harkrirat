@@ -11,9 +11,6 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema);
 
 const login = async (req, res) => {
-  if (!req.body.username || !req.body.password) {
-    return res.json({ msg: "Please check username & password" }).status(403);
-  }
   const userCreds = await User.findOne({ username: req.body.username });
 
   if (!userCreds || req.body.password !== userCreds.password) {

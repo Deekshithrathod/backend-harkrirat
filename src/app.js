@@ -4,6 +4,8 @@ const loginRouter = require("./routes/loginRoutes");
 const signupRouter = require("./routes/signupRoutes");
 const problemRouter = require("./routes/problemRoutes");
 const solutionRouter = require("./routes/solutionRoutes");
+const hasCreds = require("./middlewares/hasCreds");
+const isAdmin = require("./middlewares/isAdmin");
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.get("/", (req, res) => {
   res.json({ msg: "Hal0 Wald" });
 });
 
-app.use("/login", loginRouter);
-app.use("/signup", signupRouter);
-app.use("/problems", problemRouter);
+app.use("/login", hasCreds, loginRouter);
+app.use("/signup", hasCreds, signupRouter);
+app.use("/problems", hasCreds, isAdmin, problemRouter);
 app.use("/solutions", solutionRouter);

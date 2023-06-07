@@ -13,7 +13,7 @@ const problemSchema = new mongoose.Schema({
 
 const Problem = new mongoose.model("Problem", problemSchema);
 const addProblem = (req, res) => {
-  // verify isAdmin && validity of the problem
+  // validity of the problem
   // if not return 403
   // else accept the problem
   const problem = {

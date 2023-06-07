@@ -3,10 +3,6 @@ const User = require("../controllers/loginController").User;
 
 const signup = (req, res) => {
   // TODO: Don't allow duplicates i.e. users with same email ID to sign-up multiple times
-  if (!req.body.username || !req.body.password) {
-    return res.json({ msg: "Username & password cannot be empty" }).status(403);
-  }
-
   const user = {
     username: req.body.username,
     password: req.body.password,
