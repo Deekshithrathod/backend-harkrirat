@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const loginRouter = require("./routes/loginRoutes").router;
+const loginRouter = require("./routes/loginRoutes");
 const signupRouter = require("./routes/signupRoutes");
 const problemRouter = require("./routes/problemRoutes");
 const solutionRouter = require("./routes/solutionRoutes");
@@ -31,6 +31,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ msg: "Hal0 Wald" });
 });
+
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/problems", problemRouter);
