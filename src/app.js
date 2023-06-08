@@ -11,6 +11,7 @@ const errorMiddleware = require("./middlewares/errorHandler");
 const app = express();
 
 const PORT = 3000;
+
 mongoose.connection.once("open", () => {
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
@@ -29,3 +30,5 @@ app.use("/problems", hasCreds, isAdmin, problemRouter);
 app.use("/solutions", solutionRouter);
 
 app.use(errorMiddleware);
+
+module.exports = app;
